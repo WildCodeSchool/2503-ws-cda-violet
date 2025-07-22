@@ -7,11 +7,16 @@
  */
 
 // ↓ uncomment bellow lines and add your response!
-/*
 export default function ({ ads }: { ads: Ad[] }): Ad[] {
-  return [];
+  return ads.sort((adA, adB) => {
+    // prix differents
+    const diff = adA.price - adB.price;
+    if (diff) return diff;
+
+    // prix identiques
+    return adA.title.localeCompare(adB.title);
+  });
 }
-*/
 
 // used interfaces, do not touch
 export interface Ad {
