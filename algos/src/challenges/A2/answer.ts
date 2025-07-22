@@ -9,15 +9,19 @@
  */
 
 // ↓ uncomment bellow lines and add your response!
-/*
 export default function ({
   categories,
 }: {
   categories: Category[];
 }): CategoryWithTags[] {
-  return [];
+  return categories.map((category) => {
+    const unSortedTags = category.ads.reduce((acc, ad) => {
+      return [...acc, ...ad.tags];
+    }, [] as string[]);
+    const categoryTags = [...new Set(unSortedTags.sort())];
+    return { ...category, tags: categoryTags };
+  });
 }
-*/
 
 // used interfaces, do not touch
 interface Ad {
