@@ -52,3 +52,9 @@ services:
         condition: service_healthy
       frontend:
         condition: service_healthy
+
+  adminer:
+    image: adminer
+    depends_on:
+      database:
+        condition: service_healthy

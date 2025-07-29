@@ -60,6 +60,7 @@ export type Mutation = {
   createCategory: Scalars['ID']['output'];
   createTag: Scalars['ID']['output'];
   deleteAd: Scalars['ID']['output'];
+  signup: Scalars['ID']['output'];
   updateAd: Scalars['ID']['output'];
 };
 
@@ -84,9 +85,19 @@ export type MutationDeleteAdArgs = {
 };
 
 
+export type MutationSignupArgs = {
+  data: NewUserInput;
+};
+
+
 export type MutationUpdateAdArgs = {
   data: AdInput;
   id: Scalars['Float']['input'];
+};
+
+export type NewUserInput = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type Query = {
@@ -95,6 +106,7 @@ export type Query = {
   getAllAds: Array<Ad>;
   getAllCategories: Array<Category>;
   getAllTags: Array<Tag>;
+  getAllUsers: Array<User>;
 };
 
 
@@ -111,6 +123,13 @@ export type Tag = {
 
 export type TagInput = {
   title: Scalars['String']['input'];
+};
+
+export type User = {
+  __typename?: 'User';
+  email: Scalars['String']['output'];
+  hashedPassword: Scalars['String']['output'];
+  id: Scalars['Float']['output'];
 };
 
 export type GetAllAdsQueryVariables = Exact<{ [key: string]: never; }>;
