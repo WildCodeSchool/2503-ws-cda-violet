@@ -1,18 +1,20 @@
 services:
   frontend:
     build: ./frontend
-    ports: # hote:container
-      - 23456:5173
     volumes:
       - ./frontend/src/:/app/src/
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl --fail --request GET --url 'http://frontend:5173' || exit 1",
+        ]
     depends_on:
       backend:
         condition: service_healthy
 
   backend:
     build: ./backend
-    ports: # hote:container
-      - 12345:3000
     volumes:
       - ./backend/src/:/app/src/
     healthcheck:
@@ -37,4 +39,16 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_HOST: ${DB_HOST}
     volumes:
-      - ./database:/var/lib/postgresql/data
+      - ./persist/database:/var/lib/postgresql/data
+
+  gateway:
+    image: nginx
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf
+    ports:
+      - ${GATEWAY_PORT}:80
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_healthy
