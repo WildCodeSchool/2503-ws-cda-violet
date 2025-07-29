@@ -2,22 +2,22 @@
 
 ## Backend:
 
-- ✅ User + Role
-  - ✅ email
-  - ✅ hashedPassword
+- User + Role
+  - email
+  - hashedPassword
   - roles
-- ✅ UserResolver
+- UserResolver
   - createJwt
   - setCookie
-  - ✅ signup
-    - ✅ NewUserInput
-    - ✅ hash password
-    - ✅ createJwt()
+  - signup
+    - NewUserInput
+    - hash password
+    - createJwt()
     - setCookie()
-  - ✅ login
-    - ✅ UserInput
-    - ✅ verify password
-    - ✅ createJwt()
+  - login
+    - UserInput
+    - verify password
+    - createJwt()
     - setCookie()
   - logout
     - setCookie()
