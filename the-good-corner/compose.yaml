@@ -1,0 +1,40 @@
+services:
+  frontend:
+    build: ./frontend
+    ports: # hote:container
+      - 23456:5173
+    volumes:
+      - ./frontend/src/:/app/src/
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  backend:
+    build: ./backend
+    ports: # hote:container
+      - 12345:3000
+    volumes:
+      - ./backend/src/:/app/src/
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'curl --fail --request POST --header ''Content-Type: application/json'' --url ''http://backend:3000'' --data ''{"query":"query { __typename }"}'' || exit 1',
+        ]
+    environment:
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USER: ${DB_USER}
+      DB_HOST: ${DB_HOST}
+
+  database:
+    image: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d ${DB_DATABASE} -U ${DB_USER}"]
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_HOST: ${DB_HOST}
+    volumes:
+      - ./database:/var/lib/postgresql/data

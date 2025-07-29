@@ -1,0 +1,54 @@
+GET http://localhost:3000/ads
+
+###
+
+GET http://localhost:3000/ads/1
+
+###
+
+POST http://localhost:3000/ads
+Content-Type: application/json
+
+{
+    "title": "New Car to sell",
+    "description":
+      "My car is blue, working fine. I'm selling it because I've got a new one",
+    "owner": "car.seller@gmail.com",
+    "price": 10000,
+    "picture":
+      "https://www.automobile-magazine.fr/asset/cms/34973/config/28294/apres-plusieurs-prototypes-la-bollore-bluecar-a-fini-par-devoiler-sa-version-definitive.jpg",
+    "location": "Paris",
+    "createdAt": "2023-10-05T10:14:15.922Z",
+    "category":1,
+    "tags": ["1", "2"]
+  }
+
+###
+
+DELETE http://localhost:3000/ads/3
+
+###
+
+PUT http://localhost:3000/ads/4
+Content-Type: application/json
+
+{
+    "title": "This title was edited with PUT",
+    "description":
+      "My car is blue, working fine. I'm selling it because I've got a new one",
+    "owner": "car.seller@gmail.com",
+    "price": 10000,
+    "picture":
+      "https://www.automobile-magazine.fr/asset/cms/34973/config/28294/apres-plusieurs-prototypes-la-bollore-bluecar-a-fini-par-devoiler-sa-version-definitive.jpg",
+    "location": "Paris",
+    "createdAt": "2023-10-05T10:14:15.922Z"
+  }
+
+###
+
+PUT http://localhost:3000/ads/4
+Content-Type: application/json
+
+{
+    "location": "Marseille"
+  }
