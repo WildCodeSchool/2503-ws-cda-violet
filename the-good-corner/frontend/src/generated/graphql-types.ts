@@ -60,6 +60,7 @@ export type Mutation = {
   createCategory: Scalars['ID']['output'];
   createTag: Scalars['ID']['output'];
   deleteAd: Scalars['ID']['output'];
+  login: Scalars['ID']['output'];
   signup: Scalars['ID']['output'];
   updateAd: Scalars['ID']['output'];
 };
@@ -82,6 +83,11 @@ export type MutationCreateTagArgs = {
 
 export type MutationDeleteAdArgs = {
   id: Scalars['Float']['input'];
+};
+
+
+export type MutationLoginArgs = {
+  data: UserInput;
 };
 
 
@@ -130,6 +136,11 @@ export type User = {
   email: Scalars['String']['output'];
   hashedPassword: Scalars['String']['output'];
   id: Scalars['Float']['output'];
+};
+
+export type UserInput = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type GetAllAdsQueryVariables = Exact<{ [key: string]: never; }>;
