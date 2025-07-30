@@ -1,5 +1,6 @@
 import {
   Arg,
+  Authorized,
   Field,
   ID,
   InputType,
@@ -104,6 +105,7 @@ export default class AdResolver {
     return ad.id;
   }
 
+  @Authorized("ADMIN")
   @Mutation(() => ID)
   async deleteAd(@Arg("id") id: number) {
     await Ad.delete({ id });

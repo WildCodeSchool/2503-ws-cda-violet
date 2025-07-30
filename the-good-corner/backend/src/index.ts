@@ -9,12 +9,23 @@ import CategoryResolver from "./resolvers/CategoryResolver";
 import TagResolver from "./resolvers/TagResolver";
 import UserResolver from "./resolvers/UserResolver";
 import { UserToken } from "./types/Context";
+import { Role } from "./entities/User";
 const port = 3000;
 
 async function startServer() {
   await dataSource.initialize();
   const schema = await buildSchema({
     resolvers: [AdResolver, CategoryResolver, TagResolver, UserResolver],
+    authChecker: ({ context: { user } }, neededRoles: Role[]) => {
+      // Si pas authentifié: ❌
+      if (!user) return false;
+      // Si neededRoles vide: ✅
+      if (!neededRoles.length) return true;
+      // Si user a ADMIN: ✅
+      if (user.roles.includes(Role.ADMIN)) return true;
+      // Si user a au moins un role inclus dans neededRoles: ✅ ; Sinon ❌
+      return neededRoles.some(user.roles.includes);
+    },
   });
   const apolloServer = new ApolloServer({ schema });
   const { url } = await startStandaloneServer(apolloServer, {
