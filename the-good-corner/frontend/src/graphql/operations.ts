@@ -72,3 +72,9 @@ export const CREATE_CATEGORY = gql`
     createCategory(data: $data)
   }
 `;
+
+export const SIGNUP = gql`
+  mutation Signup($data: NewUserInput!) {
+    signup(data: $data)
+  }
+`;

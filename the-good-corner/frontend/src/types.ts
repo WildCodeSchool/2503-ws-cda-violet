@@ -1,3 +1,5 @@
+import { Roles } from "./generated/graphql-types";
+
 export type Category = {
   id: number;
   title: string;
@@ -18,4 +20,9 @@ export type AdDetails = {
   createdAt: string;
   category: Category;
   tags: Tag[];
+};
+
+export type UserProfile = {
+  email: string;
+  roles: Roles[];
 };

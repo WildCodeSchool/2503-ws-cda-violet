@@ -8,12 +8,14 @@
   - roles
 - ✅ UserResolver
   - ✅ createJwt
+    - ajouter les roles au Profile
   - ✅ setCookie
   - ✅ signup
     - ✅ NewUserInput
     - ✅ hash password
     - ✅ createJwt()
     - ✅ setCookie()
+    - droits par defaut
   - ✅ login
     - ✅ UserInput
     - ✅ verify password
@@ -31,4 +33,13 @@
 
 ## Frontend:
 
-- stocker cookie
+- ❌ stocker cookie
+- formulaires login/signup
+
+# Autorisation
+
+## Backend
+
+- ✅ entities/User.ts
+  - ajouter les Roles
+- ## resolvers/UserResolver.ts
